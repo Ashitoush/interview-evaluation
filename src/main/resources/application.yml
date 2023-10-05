@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/interview
+    username: postgres
+    password: hahaha
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+jwt:
+  secret-key: 7cfkQM9kEaAs1E3WUA5tOA5lcsxcHVHTzpVZydTiMQpBwRuiB0O3
+
+server:
+  port: 8090
