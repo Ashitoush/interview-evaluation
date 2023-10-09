@@ -1,6 +1,5 @@
 package com.ashitoush.interviewevaluation.service.impl;
 
-import com.ashitoush.interviewevaluation.config.AuthUserDetails;
 import com.ashitoush.interviewevaluation.config.CustomMessageSource;
 import com.ashitoush.interviewevaluation.constants.FieldConstants;
 import com.ashitoush.interviewevaluation.constants.MessageConstants;

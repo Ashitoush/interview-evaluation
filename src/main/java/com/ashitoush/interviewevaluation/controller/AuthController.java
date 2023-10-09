@@ -8,13 +8,12 @@ import com.ashitoush.interviewevaluation.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/api/user/")
+@RequestMapping("/api/auth/")
 @RequiredArgsConstructor
 public class AuthController {
 
@@ -29,5 +28,10 @@ public class AuthController {
     @PostMapping("login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginDto loginDto) {
         return new ResponseEntity<>(authService.authenticate(loginDto), HttpStatus.OK);
+    }
+
+    @GetMapping("generate-token-from-refresh-token")
+    public ResponseEntity<AuthResponse> generateTokenFromRefreshToken(HttpServletRequest httpServletRequest) {
+        return new ResponseEntity<>(authService.generateRefreshToken(httpServletRequest), HttpStatus.OK);
     }
 }

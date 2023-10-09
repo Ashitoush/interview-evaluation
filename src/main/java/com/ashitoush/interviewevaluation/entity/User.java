@@ -41,7 +41,7 @@ public class User {
     )
     private Department department;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role_mapping",
             joinColumns = @JoinColumn(name = "user_id"),

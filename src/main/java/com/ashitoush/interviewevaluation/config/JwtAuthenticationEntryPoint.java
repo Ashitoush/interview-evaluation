@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Collections;
 
 @Component
 @RequiredArgsConstructor
@@ -28,6 +29,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         ApiResponse apiResponse = ApiResponse.builder()
                 .status(false)
                 .message(customMessageSource.get(MessageConstants.ACCESS_DENIED))
+                .errors(Collections.singletonList(customMessageSource.get(MessageConstants.ACCESS_DENIED)))
                 .build();
         OutputStream outputStream = response.getOutputStream();
         ObjectMapper objectMapper = new ObjectMapper();

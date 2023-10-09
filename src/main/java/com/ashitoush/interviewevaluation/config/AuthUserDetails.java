@@ -32,7 +32,7 @@ public class AuthUserDetails implements UserDetails {
         List<Role> roleList = user.getRoles();
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         roleList.forEach(
-                role -> grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()))
+                role -> grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()))
         );
         return grantedAuthorities;
     }
@@ -48,7 +48,7 @@ public class AuthUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override

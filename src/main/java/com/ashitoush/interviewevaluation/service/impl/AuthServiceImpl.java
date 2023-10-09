@@ -2,7 +2,6 @@ package com.ashitoush.interviewevaluation.service.impl;
 
 import com.ashitoush.interviewevaluation.config.AuthUserDetails;
 import com.ashitoush.interviewevaluation.config.AuthUserDetailsService;
-import com.ashitoush.interviewevaluation.config.CustomMessageSource;
 import com.ashitoush.interviewevaluation.config.JwtHelper;
 import com.ashitoush.interviewevaluation.dto.LoginDto;
 import com.ashitoush.interviewevaluation.entity.User;
@@ -15,13 +14,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
     private final UserService userService;
     private final AuthUserDetailsService authUserDetailsService;
-    private final CustomMessageSource customMessageSource;
     private final AuthenticationManager authenticationManager;
     private final JwtHelper jwtHelper;
 
@@ -46,7 +46,8 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public AuthResponse generateRefreshToken(String refreshToken) {
+    public AuthResponse generateRefreshToken(HttpServletRequest httpServletRequest) {
+        String refreshToken = httpServletRequest.getHeader("Authorization").split(" ")[1];
         String username = jwtHelper.getUsernameFromToken(refreshToken);
         User user = userService.getByUsername(username);
         AuthResponse authResponse = jwtHelper.generateToken(new AuthUserDetails(user));

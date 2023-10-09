@@ -1,6 +1,5 @@
 package com.ashitoush.interviewevaluation.config;
 
-import com.ashitoush.interviewevaluation.response.ApiResponse;
 import com.ashitoush.interviewevaluation.response.AuthResponse;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -36,7 +35,7 @@ public class JwtHelper {
                 .setClaims(claims)
                 .setSubject(authUserDetails.getUsername())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 10 *  60 * 60 * 1000))
+                .setExpiration(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
 
@@ -46,7 +45,7 @@ public class JwtHelper {
                 .setClaims(claims)
                 .setSubject(authUserDetails.getUsername())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
+                .setExpiration(new Date(System.currentTimeMillis() + 10 * 60 * 60 * 1000))
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
 

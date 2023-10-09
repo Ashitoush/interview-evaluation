@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Collections;
 
 @Component
 @RequiredArgsConstructor
@@ -29,6 +30,7 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
         ApiResponse apiResponse = ApiResponse.builder()
                 .status(false)
                 .message(customMessageSource.get(MessageConstants.ACCESS_DENIED))
+                .errors(Collections.singletonList(customMessageSource.get(MessageConstants.USER_NOT_AUTHORIZED_ACCESS)))
                 .build();
 
         OutputStream out = response.getOutputStream();

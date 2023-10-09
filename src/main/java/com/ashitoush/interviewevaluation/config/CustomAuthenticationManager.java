@@ -1,5 +1,6 @@
 package com.ashitoush.interviewevaluation.config;
 
+import com.ashitoush.interviewevaluation.constants.MessageConstants;
 import com.ashitoush.interviewevaluation.exception.AppException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,14 +33,14 @@ public class CustomAuthenticationManager implements AuthenticationManager {
                 SecurityContextHolder.getContext().setAuthentication(authResult);
                 return authResult;
             } else {
-                throw new AppException("Wrong Password!!!");
+                throw new AppException(customMessageSource.get(MessageConstants.WRONG_PASSWORD));
             }
         } else {
-            throw new AppException("Wrong Username!!!");
+            throw new AppException(customMessageSource.get(MessageConstants.WRONG_EMAIL));
         }
     }
 
     private boolean isPasswordValid(UserDetails userDetails, String password) {
-        return passwordEncoder.encode(password).equals(userDetails.getPassword());
+        return passwordEncoder.matches(password, userDetails.getPassword());
     }
 }
